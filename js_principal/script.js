@@ -52,7 +52,7 @@ let games = [
     game_desc: "En este desafío, se te presentarán una serie de cartas boca abajo, cada una con una imagen representativa de sus obras y personajes inolvidables. Tu objetivo será voltear las cartas y encontrar las parejas correspondientes, recordando su ubicación en el tablero. A medida que desvelas las imágenes, revivirás momentos emblemáticos de sus novelas y te conectarás con la esencia de su escritura. La concentración y agudeza serán tus aliados para superar cada nivel y completar el juego de memoria.",
     gen: "Lógica",
     game_id: 3,
-    link: "../memory-game/index.html"
+    link: "../memorygame/index.html"
 }
 ];
 
