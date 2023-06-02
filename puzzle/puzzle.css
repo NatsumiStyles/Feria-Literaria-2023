@@ -5,8 +5,6 @@ body {
     margin: 0;
 }
 
-
-
 #board {
     width: 360px;
     height: 360px;
@@ -52,7 +50,7 @@ h1{
 }
 
 /* START */
-#start{
+.start{
     font-size: 16px;
     margin: 0px auto;
     text-align:center;

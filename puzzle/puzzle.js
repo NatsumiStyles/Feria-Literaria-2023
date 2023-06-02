@@ -1,7 +1,15 @@
 //constantes - variables - Elementos de la UI
 const title = document.getElementById("title");
 const start = document.getElementById("start");
+const index = document.getElementById("index");
 const quiz = document.getElementById("quiz");
+const nt = document.getElementById("nexttext");
+const n = document.getElementById("next");
+
+const ft = document.getElementById("finaltxt");
+const fn = document.getElementById("finalIndex");
+const fb = document.getElementById("finalbtn");
+
 const question = document.getElementById("question");
 const questionImg = document.getElementById("questionImg");
 const choiceA = document.getElementById("a");
@@ -13,81 +21,68 @@ const scoreContainer = document.getElementById("scoreContainer");
 const progress =  document.getElementById("progress");
 let imgCorrect = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
+let assignation = 0;
 
-let minigames = [
-    {
-        title: "Miguel Angel Puzzle",
-        imgs: window.onload = function() {
-            for (let r=0; r < rows; r++) {
-                for (let c=0; c < columns; c++) {
-        
-         
-                    let tile = document.createElement("img");
-         
-                    tile.src = "img/" + imgOrder.shift()  + ".png";
-        
+let using = ["img/"];//, "img2/", "img3/", "img4/", "img5/", "img6/"];
+
+let currentpuzzle = 0;
+    
+
+let tile;
+
+
+
+window.onload = function () {
+    main();
+}
+
+    
+
+
+function main(){
+
+
+        for (let r=0; r < rows; r++) {
             
-                    tile.addEventListener("dragstart", dragStart);  
-                    tile.addEventListener("dragover", dragOver);    
-                    tile.addEventListener("dragenter", dragEnter);  
-                    tile.addEventListener("dragleave", dragLeave);  
-                    tile.addEventListener("drop", dragDrop);        
-                    tile.addEventListener("dragend", dragEnd);      
+            for (let c=0; c < columns; c++) {
+                
+                
+    
+                tile = document.createElement("img");
+            
+
+                let thing = imgOrder.shift()
+     
+                tile.src = using[currentpuzzle] +  thing  + ".png";
+                tile.id= thing;
+    
         
-                    document.getElementById("board").append(tile);
-        
-                }
+                tile.addEventListener("dragstart", dragStart);  
+                tile.addEventListener("dragover", dragOver);    
+                tile.addEventListener("dragenter", dragEnter);  
+                tile.addEventListener("dragleave", dragLeave);  
+                tile.addEventListener("drop", dragDrop);        
+                tile.addEventListener("dragend", dragEnd);      
+    
+                document.getElementById("board").append(tile);
+               
+                assignation++;
+
+                tile.name = assignation;
+
             }
-        },
-        solution: imgCorrect
-
-    },
-
-   // {
-       // title: "Señor Presidente Puzzle",
-      //  imgs: window.onload = function() {
-      //      for (let r=0; r < rows; r++) {
-      //          for (let c=0; c < columns; c++) {
-        
-         
-      //              let tile = document.createElement("img");
-         
-      //              tile.src = "img/" + imgOrder.shift()  + ".jpg";
-        
             
-         //           tile.addEventListener("dragstart", dragStart);  
-        //            tile.addEventListener("dragover", dragOver);    
-         //           tile.addEventListener("dragenter", dragEnter);  
-         //           tile.addEventListener("dragleave", dragLeave);  
-        //            tile.addEventListener("drop", dragDrop);        
-        //            tile.addEventListener("dragend", dragEnd);      
-        
-       //             document.getElementById("board").append(tile);
-        
-       //         }
-       //     }
-      // },
-     //   solution: imgCorrect
-        
-  //  }
+          
+        }
+        console.log(assignation);
+}
 
-
-
-
-
-
-
-
-
-
-]
-
+   
 
 
 
 //Variables Globales 
 
-let lastMinigame = minigames.length -1;
 
 let runningQuestion = 0;
 let count = 0;
@@ -102,28 +97,24 @@ let currTile;
 let otherTile; 
 let turns = 0;
 let imgOrder = ["4", "2", "8", "5", "1", "6", "7", "9", "3"];
+let imgOrder2 = ["4", "2", "8", "5", "1", "6", "7", "9", "3"];
+     console.log(imgOrder);
 let imgSolution = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 
 
 const startQuiz = () =>{
     start.style.display="none";
+    index.style.display="none";
     title.style.display  = "none";
-   
     quiz.style.display = "block"
 
-    renderProgress();
-    renderCounter();
-    TIMER = setInterval(renderCounter, 1000); //1000ms = 1s
+
 }
 
 start.addEventListener("click",startQuiz);
 
-const renderProgress = () =>{
-    for(let qIndex = 0; qIndex <= lastMinigame; qIndex++){
-        progress.innerHTML += "<div class='prog' id="+ qIndex +"></div>";
-    }
-}
+
 
 const renderCounter = () =>{
     if(count <= questionTime){
@@ -144,6 +135,10 @@ const renderCounter = () =>{
     }
 }
 }
+
+
+
+
 
 
 
@@ -174,14 +169,91 @@ function dragEnd() {
         
         let currImg = currTile.src;
         let otherImg = otherTile.src;
+               
+        let currImgid = currTile.id;
+        let otherImgid = otherTile.id;
+
+        let currImgassig = currTile.name;
+        let otherImgassig = otherTile.name;
+
+        console.log(currTile.id);
+        console.log(otherTile.id);
+
+
+        console.log("curr img index: " + (currImgassig-1) );
+        console.log("otehr img index: " + (otherImgassig-1) );
+
+
+
+        currTile.id = otherImgid;
+        otherTile.id = currImgid;
 
         currTile.src = otherImg;
         otherTile.src = currImg;
 
+        imgOrder2[parseInt(currImgassig)-1] =  otherImgid;
 
+        imgOrder2[parseInt(otherImgassig)-1] =  currImgid;
+
+
+
+    
+        if(imgOrder2.toString() == imgSolution.toString()){
+            console.log("Juan es un crack y gei");
+
+            currentpuzzle++;
+
+            if(currentpuzzle == using.length){  
+                setTimeout( showFinalMenu , 750);
+                return;
+            }
+           
+           
+            setTimeout( showMenu , 750);
+        
+        }
+
+        console.log(imgOrder2);
+        console.log(imgSolution)
+     
+
+        //codeveloped by Juan
       
-   
+        //FORKED BY NATSUWUMI
 
 }
 
+
+
+function showMenu(){
+    n.style.display  = "block";
+    nt.style.display  = "block";
+    quiz.style.display = "none";
+
+}
+
+function returntoIndex(){
+    window.location.href = "../Juegos.html";
+    }
+
+function showFinalMenu(){
+    quiz.style.display = "none";
+    ft.style.display = "block";
+    fn.style.display = "block";
+    fb.style.display = "block";
+
+}
+
+
+
+function nextpuzzle(){
+    n.style.display  = "none";
+    nt.style.display  = "none";
+    quiz.style.display = "block";
+    assignation = 0;
+    imgOrder = ["4", "2", "8", "5", "1", "6", "7", "9", "3"];
+    imgOrder2 = ["4", "2", "8", "5", "1", "6", "7", "9", "3"];
+    document.getElementById("board").innerHTML = "";
+    main();
+}
 

@@ -3,10 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Puzzle</title>
+        <title>Feria Literaria</title>
         <link rel="stylesheet" href="puzzle.css">
-        <link rel="ICON" href="https://i.pinimg.com/originals/af/d1/e6/afd1e65cacca8822d1f857d5182b3aed.png">
-    
         
     </head>
 
@@ -14,12 +12,18 @@
        
         <section id="container">
             <h1 id="title"><i class="fa-solid fa-person-rifle"></i>Lite-Puzzle</h1>
-    <!--Inicio-->
-            <section id="start"><i class="fa-solid fa-arrow-right"></i>Inicio</section>
+            <h1 id="nexttext" style="display: none;"><i class="fa-solid fa-person-rifle"></i>¡Bien!</h1>
+            <h1 id="finaltxt" style="display: none; font-size: 45px;"><i class="fa-solid fa-person-rifle"></i>Felicidades, has completado todos los puzzles!</h1>
+
+            <section id="finalbtn" class="start" style="display: none;" onclick="location.reload()"><i class="fa-solid fa-arrow-right"></i>Volver a intentar</section>
             <br>
-            <section id="start"><i class="fa-solid fa-arrow-right"></i><a href="../Juegos.html" style="text-decoration: none; color: white;">Regresar a la página principal</a></section>
-    
-    
+            <section id="finalIndex" class="start" style="display: none;" onclick="returntoIndex()"><i class="fa-solid fa-arrow-right"></i>Regresar a la página principal</section>
+            <section id="next" class="start" style="display: none;" onclick="nextpuzzle()"><i class="fa-solid fa-arrow-right"></i>Siguiente Puzzle</section>
+            
+    <!--Inicio-->
+            <section id="start" class="start">Inicio</section>
+            <br>
+            <section id="index" class="start"><a href="../Juegos.html" style="text-decoration: none; color: white;">Regresar a la página principal</a></section>
     <!--Quiz-->
     <section id="quiz" style="display: none;">
       <!--Puzzle-->
