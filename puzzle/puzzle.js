@@ -23,7 +23,7 @@ let imgCorrect = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 let assignation = 0;
 
-let using = ["img/"];//, "img2/", "img3/", "img4/", "img5/", "img6/"];
+let using = ["img/", "img2/", "img3/", "img4/", "img5/", "img6/"];
 
 let currentpuzzle = 0;
     
